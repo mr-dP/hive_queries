@@ -1,23 +1,23 @@
-{"emp_id":10101,"emp_name":"Ravi","gender":"Male","age":22,"dept_name":"Operations","salary":4500}
-{"emp_id":10102,"emp_name":"Manish","gender":"Male","age":43,"dept_name":"Sales","salary":5500}
-{"emp_id":10103,"emp_name":"Akash","gender":"Male","age":34,"dept_name":null,"salary":null}
-{"emp_id":10104,"emp_name":"Suresh","gender":"Male","age":55,"dept_name":"Sales","salary":3400}
-{"emp_id":10105,"emp_name":"Priya","gender":"Female","age":26,"dept_name":"Accounting","salary":2500}
-{"emp_id":10106,"emp_name":"Vinay","gender":"Male","age":24,"dept_name":"Accounting","salary":3700}
-{"emp_id":10107,"emp_name":"Diya","gender":"Female","age":48,"dept_name":"HR","salary":4300}
-{"emp_id":10108,"emp_name":"Shreya","gender":"Female","age":32,"dept_name":"Operations","salary":6900}
-{"emp_id":10109,"emp_name":"Anil","gender":"Male","age":26,"dept_name":"Sales","salary":4500}
-{"emp_id":10110,"emp_name":"Raj","gender":"Male","age":41,"dept_name":"Operations","salary":3900}
-{"emp_id":10111,"emp_name":"Kabir","gender":"Male","age":53,"dept_name":"Marketing","salary":null}
-{"emp_id":10112,"emp_name":"Purab","gender":"Male","age":25,"dept_name":"Marketing","salary":2700}
-{"emp_id":10113,"emp_name":"Drishti","gender":"Female","age":47,"dept_name":"Administration","salary":4500}
-{"emp_id":10114,"emp_name":"Ishaan","gender":"Male","age":33,"dept_name":"Marketing","salary":5100}
-{"emp_id":10115,"emp_name":"Veer","gender":"Male","age":29,"dept_name":"Sales","salary":4300}
-{"emp_id":10116,"emp_name":"Kartik","gender":"Male","age":49,"dept_name":"Administration","salary":5500}
-{"emp_id":10117,"emp_name":"Samar","gender":"Male","age":42,"dept_name":"Accounting","salary":3800}
-{"emp_id":10119,"emp_name":"Rohan","gender":"Male","age":38,"dept_name":"Accounting","salary":null}
-{"emp_id":10120,"emp_name":"Ishita","gender":"Female","age":25,"dept_name":"HR","salary":5700}
-{"emp_id":10118,"emp_name":"Anushka","gender":"Female","age":46,"dept_name":"Operations","salary":3200}
+{"emp_id":10101,"emp_name":"Ravi","gender":"Male","age":22,"dept_name":"Operations","salary":4500,"start_date":"2014-08-17"}
+{"emp_id":10102,"emp_name":"Manish","gender":"Male","age":43,"dept_name":"Sales","salary":5500,"start_date":"2012-03-27"}
+{"emp_id":10103,"emp_name":"Akash","gender":"Male","age":34,"dept_name":null,"salary":null,"start_date":"2014-06-11"}
+{"emp_id":10104,"emp_name":"Suresh","gender":"Male","age":55,"dept_name":"Sales","salary":3400,"start_date":"2013-10-17"}
+{"emp_id":10105,"emp_name":"Priya","gender":"Female","age":26,"dept_name":"Accounting","salary":2500,"start_date":"2012-12-02"}
+{"emp_id":10106,"emp_name":"Vinay","gender":"Male","age":24,"dept_name":"Accounting","salary":3700,"start_date":"2013-05-23"}
+{"emp_id":10107,"emp_name":"Diya","gender":"Female","age":48,"dept_name":"HR","salary":4300,"start_date":"2015-04-30"}
+{"emp_id":10108,"emp_name":"Shreya","gender":"Female","age":32,"dept_name":"Operations","salary":6900,"start_date":"2012-04-06"}
+{"emp_id":10109,"emp_name":"Anil","gender":"Male","age":26,"dept_name":"Sales","salary":4500,"start_date":"2014-03-19"}
+{"emp_id":10110,"emp_name":"Raj","gender":"Male","age":41,"dept_name":"Operations","salary":3900,"start_date":"2012-09-14"}
+{"emp_id":10111,"emp_name":"Kabir","gender":"Male","age":53,"dept_name":"Marketing","salary":null,"start_date":"2014-04-18"}
+{"emp_id":10112,"emp_name":"Purab","gender":"Male","age":25,"dept_name":"Marketing","salary":2700,"start_date":"2014-01-26"}
+{"emp_id":10113,"emp_name":"Drishti","gender":"Female","age":47,"dept_name":"Administration","salary":4500,"start_date":"2013-08-14"}
+{"emp_id":10114,"emp_name":"Ishaan","gender":"Male","age":33,"dept_name":"Marketing","salary":5100,"start_date":"2012-04-01"}
+{"emp_id":10115,"emp_name":"Veer","gender":"Male","age":29,"dept_name":"Sales","salary":4300,"start_date":"2013-10-31"}
+{"emp_id":10116,"emp_name":"Kartik","gender":"Male","age":49,"dept_name":"Administration","salary":5500,"start_date":"2012-06-20"}
+{"emp_id":10117,"emp_name":"Samar","gender":"Male","age":42,"dept_name":"Accounting","salary":3800,"start_date":"2014-09-17"}
+{"emp_id":10119,"emp_name":"Rohan","gender":"Male","age":38,"dept_name":"Accounting","salary":null,"start_date":"2013-07-11"}
+{"emp_id":10120,"emp_name":"Ishita","gender":"Female","age":25,"dept_name":"HR","salary":5700,"start_date":"2014-02-06"}
+{"emp_id":10118,"emp_name":"Anushka","gender":"Female","age":46,"dept_name":"Operations","salary":3200,"start_date":"2012-11-10"}
 
 
 CREATE TABLE employee_json (
@@ -35,30 +35,30 @@ LOAD DATA LOCAL INPATH '/home/dipankarpal/employee_json' OVERWRITE TABLE employe
 
 
 SELECT * FROM employee_json;
--- +-----------------------+-------------------------+-----------------------+--------------------+--------------------------+-----------------------+--+
--- | employee_json.emp_id  | employee_json.emp_name  | employee_json.gender  | employee_json.age  | employee_json.dept_name  | employee_json.salary  |
--- +-----------------------+-------------------------+-----------------------+--------------------+--------------------------+-----------------------+--+
--- | 10101                 | Ravi                    | Male                  | 22                 | Operations               | 4500                  |
--- | 10102                 | Manish                  | Male                  | 43                 | Sales                    | 5500                  |
--- | 10103                 | Akash                   | Male                  | 34                 | NULL                     | NULL                  |
--- | 10104                 | Suresh                  | Male                  | 55                 | Sales                    | 3400                  |
--- | 10105                 | Priya                   | Female                | 26                 | Accounting               | 2500                  |
--- | 10106                 | Vinay                   | Male                  | 24                 | Accounting               | 3700                  |
--- | 10107                 | Diya                    | Female                | 48                 | HR                       | 4300                  |
--- | 10108                 | Shreya                  | Female                | 32                 | Operations               | 6900                  |
--- | 10109                 | Anil                    | Male                  | 26                 | Sales                    | 4500                  |
--- | 10110                 | Raj                     | Male                  | 41                 | Operations               | 3900                  |
--- | 10111                 | Kabir                   | Male                  | 53                 | Marketing                | NULL                  |
--- | 10112                 | Purab                   | Male                  | 25                 | Marketing                | 2700                  |
--- | 10113                 | Drishti                 | Female                | 47                 | Administration           | 4500                  |
--- | 10114                 | Ishaan                  | Male                  | 33                 | Marketing                | 5100                  |
--- | 10115                 | Veer                    | Male                  | 29                 | Sales                    | 4300                  |
--- | 10116                 | Kartik                  | Male                  | 49                 | Administration           | 5500                  |
--- | 10117                 | Samar                   | Male                  | 42                 | Accounting               | 3800                  |
--- | 10119                 | Rohan                   | Male                  | 38                 | Accounting               | NULL                  |
--- | 10120                 | Ishita                  | Female                | 25                 | HR                       | 5700                  |
--- | 10118                 | Anushka                 | Female                | 46                 | Operations               | 3200                  |
--- +-----------------------+-------------------------+-----------------------+--------------------+--------------------------+-----------------------+--+
+-- +-----------------------+-------------------------+-----------------------+--------------------+--------------------------+-----------------------+---------------------------+--+
+-- | employee_json.emp_id  | employee_json.emp_name  | employee_json.gender  | employee_json.age  | employee_json.dept_name  | employee_json.salary  | employee_json.start_date  |
+-- +-----------------------+-------------------------+-----------------------+--------------------+--------------------------+-----------------------+---------------------------+--+
+-- | 10101                 | Ravi                    | Male                  | 22                 | Operations               | 4500                  | 2014-08-17                |
+-- | 10102                 | Manish                  | Male                  | 43                 | Sales                    | 5500                  | 2012-03-27                |
+-- | 10103                 | Akash                   | Male                  | 34                 | NULL                     | NULL                  | 2014-06-11                |
+-- | 10104                 | Suresh                  | Male                  | 55                 | Sales                    | 3400                  | 2013-10-17                |
+-- | 10105                 | Priya                   | Female                | 26                 | Accounting               | 2500                  | 2012-12-02                |
+-- | 10106                 | Vinay                   | Male                  | 24                 | Accounting               | 3700                  | 2013-05-23                |
+-- | 10107                 | Diya                    | Female                | 48                 | HR                       | 4300                  | 2015-04-30                |
+-- | 10108                 | Shreya                  | Female                | 32                 | Operations               | 6900                  | 2012-04-06                |
+-- | 10109                 | Anil                    | Male                  | 26                 | Sales                    | 4500                  | 2014-03-19                |
+-- | 10110                 | Raj                     | Male                  | 41                 | Operations               | 3900                  | 2012-09-14                |
+-- | 10111                 | Kabir                   | Male                  | 53                 | Marketing                | NULL                  | 2014-04-18                |
+-- | 10112                 | Purab                   | Male                  | 25                 | Marketing                | 2700                  | 2014-01-26                |
+-- | 10113                 | Drishti                 | Female                | 47                 | Administration           | 4500                  | 2013-08-14                |
+-- | 10114                 | Ishaan                  | Male                  | 33                 | Marketing                | 5100                  | 2012-04-01                |
+-- | 10115                 | Veer                    | Male                  | 29                 | Sales                    | 4300                  | 2013-10-31                |
+-- | 10116                 | Kartik                  | Male                  | 49                 | Administration           | 5500                  | 2012-06-20                |
+-- | 10117                 | Samar                   | Male                  | 42                 | Accounting               | 3800                  | 2014-09-17                |
+-- | 10119                 | Rohan                   | Male                  | 38                 | Accounting               | NULL                  | 2013-07-11                |
+-- | 10120                 | Ishita                  | Female                | 25                 | HR                       | 5700                  | 2014-02-06                |
+-- | 10118                 | Anushka                 | Female                | 46                 | Operations               | 3200                  | 2012-11-10                |
+-- +-----------------------+-------------------------+-----------------------+--------------------+--------------------------+-----------------------+---------------------------+--+
 
 
 SELECT COUNT(*) AS row_count_1, COUNT(1) AS row_count_2 FROM employee_json;
@@ -423,5 +423,548 @@ SELECT t.salary, t.sal_count FROM ( SELECT salary, COUNT(*) AS sal_count FROM em
 -- | NULL      | 3            |
 -- | 4500      | 3            |
 -- +-----------+--------------+--+
+
+
+SELECT emp_name, dept_name, salary, COUNT(emp_name) OVER(PARTITION BY dept_name) AS emp_per_dept FROM employee_json;
+-- +-----------+-----------------+---------+---------------+--+
+-- | emp_name  |    dept_name    | salary  | emp_per_dept  |
+-- +-----------+-----------------+---------+---------------+--+
+-- | Akash     | NULL            | NULL    | 1             |
+-- | Rohan     | Accounting      | NULL    | 4             |
+-- | Samar     | Accounting      | 3800    | 4             |
+-- | Priya     | Accounting      | 2500    | 4             |
+-- | Vinay     | Accounting      | 3700    | 4             |
+-- | Drishti   | Administration  | 4500    | 2             |
+-- | Kartik    | Administration  | 5500    | 2             |
+-- | Diya      | HR              | 4300    | 2             |
+-- | Ishita    | HR              | 5700    | 2             |
+-- | Kabir     | Marketing       | NULL    | 3             |
+-- | Ishaan    | Marketing       | 5100    | 3             |
+-- | Purab     | Marketing       | 2700    | 3             |
+-- | Ravi      | Operations      | 4500    | 4             |
+-- | Shreya    | Operations      | 6900    | 4             |
+-- | Raj       | Operations      | 3900    | 4             |
+-- | Anushka   | Operations      | 3200    | 4             |
+-- | Suresh    | Sales           | 3400    | 4             |
+-- | Veer      | Sales           | 4300    | 4             |
+-- | Manish    | Sales           | 5500    | 4             |
+-- | Anil      | Sales           | 4500    | 4             |
+-- +-----------+-----------------+---------+---------------+--+
+
+
+SELECT emp_name, dept_name, salary, SUM(salary) OVER(ORDER BY emp_name) AS sum_of_salary FROM employee_json;
+-- +-----------+-----------------+---------+----------------+--+
+-- | emp_name  |    dept_name    | salary  | sum_of_salary  |
+-- +-----------+-----------------+---------+----------------+--+
+-- | Akash     | NULL            | NULL    | NULL           |
+-- | Anil      | Sales           | 4500    | 4500           |
+-- | Anushka   | Operations      | 3200    | 7700           |
+-- | Diya      | HR              | 4300    | 12000          |
+-- | Drishti   | Administration  | 4500    | 16500          |
+-- | Ishaan    | Marketing       | 5100    | 21600          |
+-- | Ishita    | HR              | 5700    | 27300          |
+-- | Kabir     | Marketing       | NULL    | 27300          |
+-- | Kartik    | Administration  | 5500    | 32800          |
+-- | Manish    | Sales           | 5500    | 38300          |
+-- | Priya     | Accounting      | 2500    | 40800          |
+-- | Purab     | Marketing       | 2700    | 43500          |
+-- | Raj       | Operations      | 3900    | 47400          |
+-- | Ravi      | Operations      | 4500    | 51900          |
+-- | Rohan     | Accounting      | NULL    | 51900          |
+-- | Samar     | Accounting      | 3800    | 55700          |
+-- | Shreya    | Operations      | 6900    | 62600          |
+-- | Suresh    | Sales           | 3400    | 66000          |
+-- | Veer      | Sales           | 4300    | 70300          |
+-- | Vinay     | Accounting      | 3700    | 74000          |
+-- +-----------+-----------------+---------+----------------+--+
+
+
+SELECT emp_name, dept_name, salary, SUM(salary) OVER(ORDER BY dept_name) FROM employee_json;
+-- +-----------+-----------------+---------+---------------+--+
+-- | emp_name  |    dept_name    | salary  | sum_window_0  |
+-- +-----------+-----------------+---------+---------------+--+
+-- | Akash     | NULL            | NULL    | NULL          |
+-- | Rohan     | Accounting      | NULL    | 10000         |
+-- | Priya     | Accounting      | 2500    | 10000         |
+-- | Vinay     | Accounting      | 3700    | 10000         |
+-- | Samar     | Accounting      | 3800    | 10000         |
+-- | Drishti   | Administration  | 4500    | 20000         |
+-- | Kartik    | Administration  | 5500    | 20000         |
+-- | Diya      | HR              | 4300    | 30000         |
+-- | Ishita    | HR              | 5700    | 30000         |
+-- | Ishaan    | Marketing       | 5100    | 37800         |
+-- | Kabir     | Marketing       | NULL    | 37800         |
+-- | Purab     | Marketing       | 2700    | 37800         |
+-- | Ravi      | Operations      | 4500    | 56300         |
+-- | Shreya    | Operations      | 6900    | 56300         |
+-- | Raj       | Operations      | 3900    | 56300         |
+-- | Anushka   | Operations      | 3200    | 56300         |
+-- | Anil      | Sales           | 4500    | 74000         |
+-- | Suresh    | Sales           | 3400    | 74000         |
+-- | Manish    | Sales           | 5500    | 74000         |
+-- | Veer      | Sales           | 4300    | 74000         |
+-- +-----------+-----------------+---------+---------------+--+
+
+
+SELECT emp_name, dept_name, salary, COUNT(emp_name) OVER(PARTITION BY dept_name ORDER BY emp_name) FROM employee_json;
+-- +-----------+-----------------+---------+-----------------+--+
+-- | emp_name  |    dept_name    | salary  | count_window_0  |
+-- +-----------+-----------------+---------+-----------------+--+
+-- | Akash     | NULL            | NULL    | 1               |
+-- | Priya     | Accounting      | 2500    | 1               |
+-- | Rohan     | Accounting      | NULL    | 2               |
+-- | Samar     | Accounting      | 3800    | 3               |
+-- | Vinay     | Accounting      | 3700    | 4               |
+-- | Drishti   | Administration  | 4500    | 1               |
+-- | Kartik    | Administration  | 5500    | 2               |
+-- | Diya      | HR              | 4300    | 1               |
+-- | Ishita    | HR              | 5700    | 2               |
+-- | Ishaan    | Marketing       | 5100    | 1               |
+-- | Kabir     | Marketing       | NULL    | 2               |
+-- | Purab     | Marketing       | 2700    | 3               |
+-- | Anushka   | Operations      | 3200    | 1               |
+-- | Raj       | Operations      | 3900    | 2               |
+-- | Ravi      | Operations      | 4500    | 3               |
+-- | Shreya    | Operations      | 6900    | 4               |
+-- | Anil      | Sales           | 4500    | 1               |
+-- | Manish    | Sales           | 5500    | 2               |
+-- | Suresh    | Sales           | 3400    | 3               |
+-- | Veer      | Sales           | 4300    | 4               |
+-- +-----------+-----------------+---------+-----------------+--+
+
+
+
+SELECT emp_name, dept_name, salary, ROW_NUMBER() OVER() AS row_num, RANK() OVER (PARTITION BY dept_name ORDER BY salary) AS rank, DENSE_RANK() OVER(PARTITION BY dept_name ORDER BY salary) AS d_rank, PERCENT_RANK() OVER(PARTITION BY dept_name ORDER BY salary) AS p_rank, NTILE(4) OVER(PARTITION BY dept_name ORDER BY salary) AS ntile_1 FROM employee_json;
+-- +-----------+-----------------+---------+----------+-------+---------+---------------------+----------+--+
+-- | emp_name  |    dept_name    | salary  | row_num  | rank  | d_rank  |       p_rank        | ntile_1  |
+-- +-----------+-----------------+---------+----------+-------+---------+---------------------+----------+--+
+-- | Akash     | NULL            | NULL    | 3        | 1     | 1       | 0.0                 | 1        |
+-- | Rohan     | Accounting      | NULL    | 18       | 1     | 1       | 0.0                 | 1        |
+-- | Priya     | Accounting      | 2500    | 5        | 2     | 2       | 0.3333333333333333  | 2        |
+-- | Vinay     | Accounting      | 3700    | 6        | 3     | 3       | 0.6666666666666666  | 3        |
+-- | Samar     | Accounting      | 3800    | 17       | 4     | 4       | 1.0                 | 4        |
+-- | Drishti   | Administration  | 4500    | 13       | 1     | 1       | 0.0                 | 1        |
+-- | Kartik    | Administration  | 5500    | 16       | 2     | 2       | 1.0                 | 2        |
+-- | Diya      | HR              | 4300    | 7        | 1     | 1       | 0.0                 | 1        |
+-- | Ishita    | HR              | 5700    | 19       | 2     | 2       | 1.0                 | 2        |
+-- | Kabir     | Marketing       | NULL    | 11       | 1     | 1       | 0.0                 | 1        |
+-- | Purab     | Marketing       | 2700    | 12       | 2     | 2       | 0.5                 | 2        |
+-- | Ishaan    | Marketing       | 5100    | 14       | 3     | 3       | 1.0                 | 3        |
+-- | Anushka   | Operations      | 3200    | 20       | 1     | 1       | 0.0                 | 1        |
+-- | Raj       | Operations      | 3900    | 10       | 2     | 2       | 0.3333333333333333  | 2        |
+-- | Ravi      | Operations      | 4500    | 1        | 3     | 3       | 0.6666666666666666  | 3        |
+-- | Shreya    | Operations      | 6900    | 8        | 4     | 4       | 1.0                 | 4        |
+-- | Suresh    | Sales           | 3400    | 4        | 1     | 1       | 0.0                 | 1        |
+-- | Veer      | Sales           | 4300    | 15       | 2     | 2       | 0.3333333333333333  | 2        |
+-- | Anil      | Sales           | 4500    | 9        | 3     | 3       | 0.6666666666666666  | 3        |
+-- | Manish    | Sales           | 5500    | 2        | 4     | 4       | 1.0                 | 4        |
+-- +-----------+-----------------+---------+----------+-------+---------+---------------------+----------+--+
+
+
+SELECT emp_name, dept_name, salary, ROW_NUMBER() OVER() FROM employee_json;
+-- +-----------+-----------------+---------+----------------------+--+
+-- | emp_name  |    dept_name    | salary  | row_number_window_0  |
+-- +-----------+-----------------+---------+----------------------+--+
+-- | Ravi      | Operations      | 4500    | 1                    |
+-- | Manish    | Sales           | 5500    | 2                    |
+-- | Akash     | NULL            | NULL    | 3                    |
+-- | Suresh    | Sales           | 3400    | 4                    |
+-- | Priya     | Accounting      | 2500    | 5                    |
+-- | Vinay     | Accounting      | 3700    | 6                    |
+-- | Diya      | HR              | 4300    | 7                    |
+-- | Shreya    | Operations      | 6900    | 8                    |
+-- | Anil      | Sales           | 4500    | 9                    |
+-- | Raj       | Operations      | 3900    | 10                   |
+-- | Kabir     | Marketing       | NULL    | 11                   |
+-- | Purab     | Marketing       | 2700    | 12                   |
+-- | Drishti   | Administration  | 4500    | 13                   |
+-- | Ishaan    | Marketing       | 5100    | 14                   |
+-- | Veer      | Sales           | 4300    | 15                   |
+-- | Kartik    | Administration  | 5500    | 16                   |
+-- | Samar     | Accounting      | 3800    | 17                   |
+-- | Rohan     | Accounting      | NULL    | 18                   |
+-- | Ishita    | HR              | 5700    | 19                   |
+-- | Anushka   | Operations      | 3200    | 20                   |
+-- +-----------+-----------------+---------+----------------------+--+
+
+
+SELECT emp_name, dept_name, salary, ROW_NUMBER() OVER(ORDER BY emp_name) FROM employee_json;
+-- +-----------+-----------------+---------+----------------------+--+
+-- | emp_name  |    dept_name    | salary  | row_number_window_0  |
+-- +-----------+-----------------+---------+----------------------+--+
+-- | Akash     | NULL            | NULL    | 1                    |
+-- | Anil      | Sales           | 4500    | 2                    |
+-- | Anushka   | Operations      | 3200    | 3                    |
+-- | Diya      | HR              | 4300    | 4                    |
+-- | Drishti   | Administration  | 4500    | 5                    |
+-- | Ishaan    | Marketing       | 5100    | 6                    |
+-- | Ishita    | HR              | 5700    | 7                    |
+-- | Kabir     | Marketing       | NULL    | 8                    |
+-- | Kartik    | Administration  | 5500    | 9                    |
+-- | Manish    | Sales           | 5500    | 10                   |
+-- | Priya     | Accounting      | 2500    | 11                   |
+-- | Purab     | Marketing       | 2700    | 12                   |
+-- | Raj       | Operations      | 3900    | 13                   |
+-- | Ravi      | Operations      | 4500    | 14                   |
+-- | Rohan     | Accounting      | NULL    | 15                   |
+-- | Samar     | Accounting      | 3800    | 16                   |
+-- | Shreya    | Operations      | 6900    | 17                   |
+-- | Suresh    | Sales           | 3400    | 18                   |
+-- | Veer      | Sales           | 4300    | 19                   |
+-- | Vinay     | Accounting      | 3700    | 20                   |
+-- +-----------+-----------------+---------+----------------------+--+
+
+
+SELECT emp_name, dept_name, salary, RANK() OVER(ORDER BY salary) FROM employee_json;
+-- +-----------+-----------------+---------+----------------+--+
+-- | emp_name  |    dept_name    | salary  | rank_window_0  |
+-- +-----------+-----------------+---------+----------------+--+
+-- | Kabir     | Marketing       | NULL    | 1              |
+-- | Rohan     | Accounting      | NULL    | 1              |
+-- | Akash     | NULL            | NULL    | 1              |
+-- | Priya     | Accounting      | 2500    | 4              |
+-- | Purab     | Marketing       | 2700    | 5              |
+-- | Anushka   | Operations      | 3200    | 6              |
+-- | Suresh    | Sales           | 3400    | 7              |
+-- | Vinay     | Accounting      | 3700    | 8              |
+-- | Samar     | Accounting      | 3800    | 9              |
+-- | Raj       | Operations      | 3900    | 10             |
+-- | Diya      | HR              | 4300    | 11             |
+-- | Veer      | Sales           | 4300    | 11             |
+-- | Ravi      | Operations      | 4500    | 13             |
+-- | Anil      | Sales           | 4500    | 13             |
+-- | Drishti   | Administration  | 4500    | 13             |
+-- | Ishaan    | Marketing       | 5100    | 16             |
+-- | Kartik    | Administration  | 5500    | 17             |
+-- | Manish    | Sales           | 5500    | 17             |
+-- | Ishita    | HR              | 5700    | 19             |
+-- | Shreya    | Operations      | 6900    | 20             |
+-- +-----------+-----------------+---------+----------------+--+
+
+
+SELECT emp_name, dept_name, salary, DENSE_RANK() OVER(ORDER BY salary) FROM employee_json;
+-- +-----------+-----------------+---------+----------------------+--+
+-- | emp_name  |    dept_name    | salary  | dense_rank_window_0  |
+-- +-----------+-----------------+---------+----------------------+--+
+-- | Kabir     | Marketing       | NULL    | 1                    |
+-- | Rohan     | Accounting      | NULL    | 1                    |
+-- | Akash     | NULL            | NULL    | 1                    |
+-- | Priya     | Accounting      | 2500    | 2                    |
+-- | Purab     | Marketing       | 2700    | 3                    |
+-- | Anushka   | Operations      | 3200    | 4                    |
+-- | Suresh    | Sales           | 3400    | 5                    |
+-- | Vinay     | Accounting      | 3700    | 6                    |
+-- | Samar     | Accounting      | 3800    | 7                    |
+-- | Raj       | Operations      | 3900    | 8                    |
+-- | Diya      | HR              | 4300    | 9                    |
+-- | Veer      | Sales           | 4300    | 9                    |
+-- | Ravi      | Operations      | 4500    | 10                   |
+-- | Anil      | Sales           | 4500    | 10                   |
+-- | Drishti   | Administration  | 4500    | 10                   |
+-- | Ishaan    | Marketing       | 5100    | 11                   |
+-- | Kartik    | Administration  | 5500    | 12                   |
+-- | Manish    | Sales           | 5500    | 12                   |
+-- | Ishita    | HR              | 5700    | 13                   |
+-- | Shreya    | Operations      | 6900    | 14                   |
+-- +-----------+-----------------+---------+----------------------+--+
+
+
+SELECT emp_name, dept_name, salary, PERCENT_RANK() OVER(ORDER BY salary) FROM employee_json;
+--  PERCENT_RANK => (current rank - 1)/(total number of rows - 1)
++-----------+-----------------+---------+------------------------+--+
+| emp_name  |    dept_name    | salary  | percent_rank_window_0  |
++-----------+-----------------+---------+------------------------+--+
+| Kabir     | Marketing       | NULL    | 0.0                    |
+| Rohan     | Accounting      | NULL    | 0.0                    |
+| Akash     | NULL            | NULL    | 0.0                    |
+| Priya     | Accounting      | 2500    | 0.15789473684210525    |
+| Purab     | Marketing       | 2700    | 0.21052631578947367    |
+| Anushka   | Operations      | 3200    | 0.2631578947368421     |
+| Suresh    | Sales           | 3400    | 0.3157894736842105     |
+| Vinay     | Accounting      | 3700    | 0.3684210526315789     |
+| Samar     | Accounting      | 3800    | 0.42105263157894735    |
+| Raj       | Operations      | 3900    | 0.47368421052631576    |
+| Diya      | HR              | 4300    | 0.5263157894736842     |
+| Veer      | Sales           | 4300    | 0.5263157894736842     |
+| Ravi      | Operations      | 4500    | 0.631578947368421      |
+| Anil      | Sales           | 4500    | 0.631578947368421      |
+| Drishti   | Administration  | 4500    | 0.631578947368421      |
+| Ishaan    | Marketing       | 5100    | 0.7894736842105263     |
+| Kartik    | Administration  | 5500    | 0.8421052631578947     |
+| Manish    | Sales           | 5500    | 0.8421052631578947     |
+| Ishita    | HR              | 5700    | 0.9473684210526315     |
+| Shreya    | Operations      | 6900    | 1.0                    |
++-----------+-----------------+---------+------------------------+--
+
+
+SELECT emp_name, dept_name, salary, CUME_DIST() OVER(PARTITION BY dept_name ORDER BY salary) FROM employee_json;
+-- CUME_DIST => (number of rows ≤ current row)/(total number of rows)
+-- +-----------+-----------------+---------+---------------------+--+
+-- | emp_name  |    dept_name    | salary  | cume_dist_window_0  |
+-- +-----------+-----------------+---------+---------------------+--+
+-- | Akash     | NULL            | NULL    | 1.0                 |
+-- | Rohan     | Accounting      | NULL    | 0.25                |
+-- | Priya     | Accounting      | 2500    | 0.5                 |
+-- | Vinay     | Accounting      | 3700    | 0.75                |
+-- | Samar     | Accounting      | 3800    | 1.0                 |
+-- | Drishti   | Administration  | 4500    | 0.5                 |
+-- | Kartik    | Administration  | 5500    | 1.0                 |
+-- | Diya      | HR              | 4300    | 0.5                 |
+-- | Ishita    | HR              | 5700    | 1.0                 |
+-- | Kabir     | Marketing       | NULL    | 0.3333333333333333  |
+-- | Purab     | Marketing       | 2700    | 0.6666666666666666  |
+-- | Ishaan    | Marketing       | 5100    | 1.0                 |
+-- | Anushka   | Operations      | 3200    | 0.25                |
+-- | Raj       | Operations      | 3900    | 0.5                 |
+-- | Ravi      | Operations      | 4500    | 0.75                |
+-- | Shreya    | Operations      | 6900    | 1.0                 |
+-- | Suresh    | Sales           | 3400    | 0.25                |
+-- | Veer      | Sales           | 4300    | 0.5                 |
+-- | Anil      | Sales           | 4500    | 0.75                |
+-- | Manish    | Sales           | 5500    | 1.0                 |
+-- +-----------+-----------------+---------+---------------------+--+
+
+
+SELECT emp_name, dept_name, salary, LEAD(salary, 2) OVER(PARTITION BY dept_name ORDER BY salary) FROM employee_json;
+-- +-----------+-----------------+---------+----------------+--+
+-- | emp_name  |    dept_name    | salary  | lead_window_0  |
+-- +-----------+-----------------+---------+----------------+--+
+-- | Akash     | NULL            | NULL    | NULL           |
+-- | Rohan     | Accounting      | NULL    | 3700           |
+-- | Priya     | Accounting      | 2500    | 3800           |
+-- | Vinay     | Accounting      | 3700    | NULL           |
+-- | Samar     | Accounting      | 3800    | NULL           |
+-- | Drishti   | Administration  | 4500    | NULL           |
+-- | Kartik    | Administration  | 5500    | NULL           |
+-- | Diya      | HR              | 4300    | NULL           |
+-- | Ishita    | HR              | 5700    | NULL           |
+-- | Kabir     | Marketing       | NULL    | 5100           |
+-- | Purab     | Marketing       | 2700    | NULL           |
+-- | Ishaan    | Marketing       | 5100    | NULL           |
+-- | Anushka   | Operations      | 3200    | 4500           |
+-- | Raj       | Operations      | 3900    | 6900           |
+-- | Ravi      | Operations      | 4500    | NULL           |
+-- | Shreya    | Operations      | 6900    | NULL           |
+-- | Suresh    | Sales           | 3400    | 4500           |
+-- | Veer      | Sales           | 4300    | 5500           |
+-- | Anil      | Sales           | 4500    | NULL           |
+-- | Manish    | Sales           | 5500    | NULL           |
+-- +-----------+-----------------+---------+----------------+--+
+
+
+SELECT emp_name, dept_name, salary, LEAD(salary, 2) OVER(ORDER BY salary) FROM employee_json;
+-- +-----------+-----------------+---------+----------------+--+
+-- | emp_name  |    dept_name    | salary  | lead_window_0  |
+-- +-----------+-----------------+---------+----------------+--+
+-- | Kabir     | Marketing       | NULL    | NULL           |
+-- | Rohan     | Accounting      | NULL    | 2500           |
+-- | Akash     | NULL            | NULL    | 2700           |
+-- | Priya     | Accounting      | 2500    | 3200           |
+-- | Purab     | Marketing       | 2700    | 3400           |
+-- | Anushka   | Operations      | 3200    | 3700           |
+-- | Suresh    | Sales           | 3400    | 3800           |
+-- | Vinay     | Accounting      | 3700    | 3900           |
+-- | Samar     | Accounting      | 3800    | 4300           |
+-- | Raj       | Operations      | 3900    | 4300           |
+-- | Diya      | HR              | 4300    | 4500           |
+-- | Veer      | Sales           | 4300    | 4500           |
+-- | Ravi      | Operations      | 4500    | 4500           |
+-- | Anil      | Sales           | 4500    | 5100           |
+-- | Drishti   | Administration  | 4500    | 5500           |
+-- | Ishaan    | Marketing       | 5100    | 5500           |
+-- | Kartik    | Administration  | 5500    | 5700           |
+-- | Manish    | Sales           | 5500    | 6900           |
+-- | Ishita    | HR              | 5700    | NULL           |
+-- | Shreya    | Operations      | 6900    | NULL           |
+-- +-----------+-----------------+---------+----------------+--+
+
+
+SELECT emp_name, dept_name, salary, LAG(salary, 2) OVER(ORDER BY salary) FROM employee_json;
+-- +-----------+-----------------+---------+---------------+--+
+-- | emp_name  |    dept_name    | salary  | lag_window_0  |
+-- +-----------+-----------------+---------+---------------+--+
+-- | Kabir     | Marketing       | NULL    | NULL          |
+-- | Rohan     | Accounting      | NULL    | NULL          |
+-- | Akash     | NULL            | NULL    | NULL          |
+-- | Priya     | Accounting      | 2500    | NULL          |
+-- | Purab     | Marketing       | 2700    | NULL          |
+-- | Anushka   | Operations      | 3200    | 2500          |
+-- | Suresh    | Sales           | 3400    | 2700          |
+-- | Vinay     | Accounting      | 3700    | 3200          |
+-- | Samar     | Accounting      | 3800    | 3400          |
+-- | Raj       | Operations      | 3900    | 3700          |
+-- | Diya      | HR              | 4300    | 3800          |
+-- | Veer      | Sales           | 4300    | 3900          |
+-- | Ravi      | Operations      | 4500    | 4300          |
+-- | Anil      | Sales           | 4500    | 4300          |
+-- | Drishti   | Administration  | 4500    | 4500          |
+-- | Ishaan    | Marketing       | 5100    | 4500          |
+-- | Kartik    | Administration  | 5500    | 4500          |
+-- | Manish    | Sales           | 5500    | 5100          |
+-- | Ishita    | HR              | 5700    | 5500          |
+-- | Shreya    | Operations      | 6900    | 5500          |
+-- +-----------+-----------------+---------+---------------+--+
+
+
+SELECT emp_name, dept_name, salary, LAG(salary, 2) OVER(PARTITION BY dept_name ORDER BY salary) FROM employee_json;
+-- +-----------+-----------------+---------+---------------+--+
+-- | emp_name  |    dept_name    | salary  | lag_window_0  |
+-- +-----------+-----------------+---------+---------------+--+
+-- | Akash     | NULL            | NULL    | NULL          |
+-- | Rohan     | Accounting      | NULL    | NULL          |
+-- | Priya     | Accounting      | 2500    | NULL          |
+-- | Vinay     | Accounting      | 3700    | NULL          |
+-- | Samar     | Accounting      | 3800    | 2500          |
+-- | Drishti   | Administration  | 4500    | NULL          |
+-- | Kartik    | Administration  | 5500    | NULL          |
+-- | Diya      | HR              | 4300    | NULL          |
+-- | Ishita    | HR              | 5700    | NULL          |
+-- | Kabir     | Marketing       | NULL    | NULL          |
+-- | Purab     | Marketing       | 2700    | NULL          |
+-- | Ishaan    | Marketing       | 5100    | NULL          |
+-- | Anushka   | Operations      | 3200    | NULL          |
+-- | Raj       | Operations      | 3900    | NULL          |
+-- | Ravi      | Operations      | 4500    | 3200          |
+-- | Shreya    | Operations      | 6900    | 3900          |
+-- | Suresh    | Sales           | 3400    | NULL          |
+-- | Veer      | Sales           | 4300    | NULL          |
+-- | Anil      | Sales           | 4500    | 3400          |
+-- | Manish    | Sales           | 5500    | 4300          |
+-- +-----------+-----------------+---------+---------------+--+
+
+
+SELECT emp_name, dept_name, salary, LAG(salary, 2, 0) OVER(PARTITION BY dept_name ORDER BY salary) FROM employee_json;
+-- +-----------+-----------------+---------+---------------+--+
+-- | emp_name  |    dept_name    | salary  | lag_window_0  |
+-- +-----------+-----------------+---------+---------------+--+
+-- | Akash     | NULL            | NULL    | 0             |
+-- | Rohan     | Accounting      | NULL    | 0             |
+-- | Priya     | Accounting      | 2500    | 0             |
+-- | Vinay     | Accounting      | 3700    | NULL          |
+-- | Samar     | Accounting      | 3800    | 2500          |
+-- | Drishti   | Administration  | 4500    | 0             |
+-- | Kartik    | Administration  | 5500    | 0             |
+-- | Diya      | HR              | 4300    | 0             |
+-- | Ishita    | HR              | 5700    | 0             |
+-- | Kabir     | Marketing       | NULL    | 0             |
+-- | Purab     | Marketing       | 2700    | 0             |
+-- | Ishaan    | Marketing       | 5100    | NULL          |
+-- | Anushka   | Operations      | 3200    | 0             |
+-- | Raj       | Operations      | 3900    | 0             |
+-- | Ravi      | Operations      | 4500    | 3200          |
+-- | Shreya    | Operations      | 6900    | 3900          |
+-- | Suresh    | Sales           | 3400    | 0             |
+-- | Veer      | Sales           | 4300    | 0             |
+-- | Anil      | Sales           | 4500    | 3400          |
+-- | Manish    | Sales           | 5500    | 4300          |
+-- +-----------+-----------------+---------+---------------+--+
+
+
+SELECT emp_name, dept_name, salary, LEAD(salary, 2, 0) OVER(PARTITION BY dept_name ORDER BY salary) FROM employee_json;
++-----------+-----------------+---------+----------------+--+
+| emp_name  |    dept_name    | salary  | lead_window_0  |
++-----------+-----------------+---------+----------------+--+
+| Akash     | NULL            | NULL    | 0              |
+| Rohan     | Accounting      | NULL    | 3700           |
+| Priya     | Accounting      | 2500    | 3800           |
+| Vinay     | Accounting      | 3700    | 0              |
+| Samar     | Accounting      | 3800    | 0              |
+| Drishti   | Administration  | 4500    | 0              |
+| Kartik    | Administration  | 5500    | 0              |
+| Diya      | HR              | 4300    | 0              |
+| Ishita    | HR              | 5700    | 0              |
+| Kabir     | Marketing       | NULL    | 5100           |
+| Purab     | Marketing       | 2700    | 0              |
+| Ishaan    | Marketing       | 5100    | 0              |
+| Anushka   | Operations      | 3200    | 4500           |
+| Raj       | Operations      | 3900    | 6900           |
+| Ravi      | Operations      | 4500    | 0              |
+| Shreya    | Operations      | 6900    | 0              |
+| Suresh    | Sales           | 3400    | 4500           |
+| Veer      | Sales           | 4300    | 5500           |
+| Anil      | Sales           | 4500    | 0              |
+| Manish    | Sales           | 5500    | 0              |
++-----------+-----------------+---------+----------------+--+
+
+
+SELECT emp_name, dept_name, salary, FIRST_VALUE(salary) OVER(PARTITION BY dept_name ORDER BY salary) FROM employee_json;
+-- +-----------+-----------------+---------+-----------------------+--+
+-- | emp_name  |    dept_name    | salary  | first_value_window_0  |
+-- +-----------+-----------------+---------+-----------------------+--+
+-- | Akash     | NULL            | NULL    | NULL                  |
+-- | Rohan     | Accounting      | NULL    | NULL                  |
+-- | Priya     | Accounting      | 2500    | NULL                  |
+-- | Vinay     | Accounting      | 3700    | NULL                  |
+-- | Samar     | Accounting      | 3800    | NULL                  |
+-- | Drishti   | Administration  | 4500    | 4500                  |
+-- | Kartik    | Administration  | 5500    | 4500                  |
+-- | Diya      | HR              | 4300    | 4300                  |
+-- | Ishita    | HR              | 5700    | 4300                  |
+-- | Kabir     | Marketing       | NULL    | NULL                  |
+-- | Purab     | Marketing       | 2700    | NULL                  |
+-- | Ishaan    | Marketing       | 5100    | NULL                  |
+-- | Anushka   | Operations      | 3200    | 3200                  |
+-- | Raj       | Operations      | 3900    | 3200                  |
+-- | Ravi      | Operations      | 4500    | 3200                  |
+-- | Shreya    | Operations      | 6900    | 3200                  |
+-- | Suresh    | Sales           | 3400    | 3400                  |
+-- | Veer      | Sales           | 4300    | 3400                  |
+-- | Anil      | Sales           | 4500    | 3400                  |
+-- | Manish    | Sales           | 5500    | 3400                  |
+-- +-----------+-----------------+---------+-----------------------+--+
+
+
+SELECT emp_name, dept_name, salary, LAST_VALUE(salary) OVER(PARTITION BY dept_name ORDER BY salary) FROM employee_json;
+-- +-----------+-----------------+---------+----------------------+--+
+-- | emp_name  |    dept_name    | salary  | last_value_window_0  |
+-- +-----------+-----------------+---------+----------------------+--+
+-- | Akash     | NULL            | NULL    | NULL                 |
+-- | Rohan     | Accounting      | NULL    | NULL                 |
+-- | Priya     | Accounting      | 2500    | 2500                 |
+-- | Vinay     | Accounting      | 3700    | 3700                 |
+-- | Samar     | Accounting      | 3800    | 3800                 |
+-- | Drishti   | Administration  | 4500    | 4500                 |
+-- | Kartik    | Administration  | 5500    | 5500                 |
+-- | Diya      | HR              | 4300    | 4300                 |
+-- | Ishita    | HR              | 5700    | 5700                 |
+-- | Kabir     | Marketing       | NULL    | NULL                 |
+-- | Purab     | Marketing       | 2700    | 2700                 |
+-- | Ishaan    | Marketing       | 5100    | 5100                 |
+-- | Anushka   | Operations      | 3200    | 3200                 |
+-- | Raj       | Operations      | 3900    | 3900                 |
+-- | Ravi      | Operations      | 4500    | 4500                 |
+-- | Shreya    | Operations      | 6900    | 6900                 |
+-- | Suresh    | Sales           | 3400    | 3400                 |
+-- | Veer      | Sales           | 4300    | 4300                 |
+-- | Anil      | Sales           | 4500    | 4500                 |
+-- | Manish    | Sales           | 5500    | 5500                 |
+-- +-----------+-----------------+---------+----------------------+--+
+
+
+SELECT emp_name, dept_name, salary, LAST_VALUE(salary) OVER(PARTITION BY dept_name ORDER BY salary RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) FROM employee_json;
+-- +-----------+-----------------+---------+----------------------+--+
+-- | emp_name  |    dept_name    | salary  | last_value_window_0  |
+-- +-----------+-----------------+---------+----------------------+--+
+-- | Akash     | NULL            | NULL    | NULL                 |
+-- | Rohan     | Accounting      | NULL    | 3800                 |
+-- | Priya     | Accounting      | 2500    | 3800                 |
+-- | Vinay     | Accounting      | 3700    | 3800                 |
+-- | Samar     | Accounting      | 3800    | 3800                 |
+-- | Drishti   | Administration  | 4500    | 5500                 |
+-- | Kartik    | Administration  | 5500    | 5500                 |
+-- | Diya      | HR              | 4300    | 5700                 |
+-- | Ishita    | HR              | 5700    | 5700                 |
+-- | Kabir     | Marketing       | NULL    | 5100                 |
+-- | Purab     | Marketing       | 2700    | 5100                 |
+-- | Ishaan    | Marketing       | 5100    | 5100                 |
+-- | Anushka   | Operations      | 3200    | 6900                 |
+-- | Raj       | Operations      | 3900    | 6900                 |
+-- | Ravi      | Operations      | 4500    | 6900                 |
+-- | Shreya    | Operations      | 6900    | 6900                 |
+-- | Suresh    | Sales           | 3400    | 5500                 |
+-- | Veer      | Sales           | 4300    | 5500                 |
+-- | Anil      | Sales           | 4500    | 5500                 |
+-- | Manish    | Sales           | 5500    | 5500                 |
+-- +-----------+-----------------+---------+----------------------+--+
 
 
