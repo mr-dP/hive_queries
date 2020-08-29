@@ -1,0 +1,427 @@
+{"emp_id":10101,"emp_name":"Ravi","gender":"Male","age":22,"dept_name":"Operations","salary":4500}
+{"emp_id":10102,"emp_name":"Manish","gender":"Male","age":43,"dept_name":"Sales","salary":5500}
+{"emp_id":10103,"emp_name":"Akash","gender":"Male","age":34,"dept_name":null,"salary":null}
+{"emp_id":10104,"emp_name":"Suresh","gender":"Male","age":55,"dept_name":"Sales","salary":3400}
+{"emp_id":10105,"emp_name":"Priya","gender":"Female","age":26,"dept_name":"Accounting","salary":2500}
+{"emp_id":10106,"emp_name":"Vinay","gender":"Male","age":24,"dept_name":"Accounting","salary":3700}
+{"emp_id":10107,"emp_name":"Diya","gender":"Female","age":48,"dept_name":"HR","salary":4300}
+{"emp_id":10108,"emp_name":"Shreya","gender":"Female","age":32,"dept_name":"Operations","salary":6900}
+{"emp_id":10109,"emp_name":"Anil","gender":"Male","age":26,"dept_name":"Sales","salary":4500}
+{"emp_id":10110,"emp_name":"Raj","gender":"Male","age":41,"dept_name":"Operations","salary":3900}
+{"emp_id":10111,"emp_name":"Kabir","gender":"Male","age":53,"dept_name":"Marketing","salary":null}
+{"emp_id":10112,"emp_name":"Purab","gender":"Male","age":25,"dept_name":"Marketing","salary":2700}
+{"emp_id":10113,"emp_name":"Drishti","gender":"Female","age":47,"dept_name":"Administration","salary":4500}
+{"emp_id":10114,"emp_name":"Ishaan","gender":"Male","age":33,"dept_name":"Marketing","salary":5100}
+{"emp_id":10115,"emp_name":"Veer","gender":"Male","age":29,"dept_name":"Sales","salary":4300}
+{"emp_id":10116,"emp_name":"Kartik","gender":"Male","age":49,"dept_name":"Administration","salary":5500}
+{"emp_id":10117,"emp_name":"Samar","gender":"Male","age":42,"dept_name":"Accounting","salary":3800}
+{"emp_id":10119,"emp_name":"Rohan","gender":"Male","age":38,"dept_name":"Accounting","salary":null}
+{"emp_id":10120,"emp_name":"Ishita","gender":"Female","age":25,"dept_name":"HR","salary":5700}
+{"emp_id":10118,"emp_name":"Anushka","gender":"Female","age":46,"dept_name":"Operations","salary":3200}
+
+
+CREATE TABLE employee_json (
+  emp_id INT,
+  emp_name STRING,
+  gender STRING,
+  age INT,
+  dept_name STRING,
+  salary INT
+) ROW FORMAT SERDE 'org.apache.hive.hcatalog.data.JsonSerDe'
+STORED AS textfile;
+
+
+LOAD DATA LOCAL INPATH '/home/dipankarpal/employee_json' OVERWRITE TABLE employee_json;
+
+
+SELECT * FROM employee_json;
+-- +-----------------------+-------------------------+-----------------------+--------------------+--------------------------+-----------------------+--+
+-- | employee_json.emp_id  | employee_json.emp_name  | employee_json.gender  | employee_json.age  | employee_json.dept_name  | employee_json.salary  |
+-- +-----------------------+-------------------------+-----------------------+--------------------+--------------------------+-----------------------+--+
+-- | 10101                 | Ravi                    | Male                  | 22                 | Operations               | 4500                  |
+-- | 10102                 | Manish                  | Male                  | 43                 | Sales                    | 5500                  |
+-- | 10103                 | Akash                   | Male                  | 34                 | NULL                     | NULL                  |
+-- | 10104                 | Suresh                  | Male                  | 55                 | Sales                    | 3400                  |
+-- | 10105                 | Priya                   | Female                | 26                 | Accounting               | 2500                  |
+-- | 10106                 | Vinay                   | Male                  | 24                 | Accounting               | 3700                  |
+-- | 10107                 | Diya                    | Female                | 48                 | HR                       | 4300                  |
+-- | 10108                 | Shreya                  | Female                | 32                 | Operations               | 6900                  |
+-- | 10109                 | Anil                    | Male                  | 26                 | Sales                    | 4500                  |
+-- | 10110                 | Raj                     | Male                  | 41                 | Operations               | 3900                  |
+-- | 10111                 | Kabir                   | Male                  | 53                 | Marketing                | NULL                  |
+-- | 10112                 | Purab                   | Male                  | 25                 | Marketing                | 2700                  |
+-- | 10113                 | Drishti                 | Female                | 47                 | Administration           | 4500                  |
+-- | 10114                 | Ishaan                  | Male                  | 33                 | Marketing                | 5100                  |
+-- | 10115                 | Veer                    | Male                  | 29                 | Sales                    | 4300                  |
+-- | 10116                 | Kartik                  | Male                  | 49                 | Administration           | 5500                  |
+-- | 10117                 | Samar                   | Male                  | 42                 | Accounting               | 3800                  |
+-- | 10119                 | Rohan                   | Male                  | 38                 | Accounting               | NULL                  |
+-- | 10120                 | Ishita                  | Female                | 25                 | HR                       | 5700                  |
+-- | 10118                 | Anushka                 | Female                | 46                 | Operations               | 3200                  |
+-- +-----------------------+-------------------------+-----------------------+--------------------+--------------------------+-----------------------+--+
+
+
+SELECT COUNT(*) AS row_count_1, COUNT(1) AS row_count_2 FROM employee_json;
+-- +--------------+--------------+--+
+-- | row_count_1  | row_count_2  |
+-- +--------------+--------------+--+
+-- | 20           | 20           |
+-- +--------------+--------------+--+
+
+
+SELECT gender, COUNT(*) AS row_count FROM employee_json GROUP BY gender;
+-- +---------+------------+--+
+-- | gender  | row_count  |
+-- +---------+------------+--+
+-- | Female  | 6          |
+-- | Male    | 14         |
+-- +---------+------------+--+
+
+
+SELECT gender, AVG(age) AS avg_age, COUNT(*) AS row_count FROM employee_json GROUP BY gender;
+-- +---------+---------------------+------------+--+
+-- | gender  |       avg_age       | row_count  |
+-- +---------+---------------------+------------+--+
+-- | Female  | 37.333333333333336  | 6          |
+-- | Male    | 36.714285714285715  | 14         |
+-- +---------+---------------------+------------+--+
+
+
+SELECT SUM(CASE WHEN gender = "Female" THEN age ELSE 0 END) / COUNT(CASE WHEN gender = "Female" THEN 1 ELSE null END) AS avg_female_age FROM employee_json;
+-- +---------------------+--+
+-- |   avg_female_age    |
+-- +---------------------+--+
+-- | 37.333333333333336  |
+-- +---------------------+--+
+
+
+SELECT SUM(COALESCE(age, 0)) AS total_age, SUM(IF(gender = "Male", age, 0)) AS total_male_age FROM employee_json;
+-- +------------+-----------------+--+
+-- | total_age  | total_male_age  |
+-- +------------+-----------------+--+
+-- | 738        | 514             |
+-- +------------+-----------------+--+
+
+
+SELECT IF(salary = 4500, salary, 'others') AS salary_group, COUNT(1) FROM employee_json GROUP BY IF(salary = 4500, salary, 'others');
+-- +---------------+------+--+
+-- | salary_group  | _c1  |
+-- +---------------+------+--+
+-- | 4500          | 3    |
+-- | others        | 17   |
+-- +---------------+------+--+
+
+
+SELECT AVG(COUNT(*)) FROM employee_json;
+-- Error: Error while compiling statement: FAILED: SemanticException [Error 10128]: Line 1:11 Not yet supported place for UDAF 'COUNT' (state=42000,code=10128)  NESTED AGGREGATE FUNCTIONS ARE NOT ALLOWED
+
+
+SELECT MAX(null) AS max_of_null, MIN(null) AS min_of_null, COUNT(null) AS count_of_null;
+-- +--------------+--------------+----------------+--+
+-- | max_of_null  | min_of_null  | count_of_null  |
+-- +--------------+--------------+----------------+--+
+-- | NULL         | NULL         | 0              |
+-- +--------------+--------------+----------------+--+
+
+
+SELECT SUM(null) AS sum_of_null, AVG(null) AS avg_of_null;
+-- Error: Error while compiling statement: FAILED: UDFArgumentTypeException Only numeric or string type arguments are accepted but void is passed. (state=42000,code =40000)
+
+
+CREATE TABLE tab(value1 INT, value2 INT);
+
+INSERT INTO tab VALUES(1, 2), (null, 4), (1, 6);
+
+SELECT * FROM tab;
+-- +-------------+-------------+--+
+-- | tab.value1  | tab.value2  |
+-- +-------------+-------------+--+
+-- | 1           | 2           |
+-- | NULL        | 4           |
+-- | 1           | 6           |
+-- +-------------+-------------+--+
+
+SELECT SUM(value1), SUM(value1 + value2) FROM tab;
+-- +------+------+--+
+-- | _c0  | _c1  |
+-- +------+------+--+
+-- | 2    | 10   |
+-- +------+------+--+
+
+SELECT SUM(COALESCE(value1, 0)), SUM(COALESCE(value1, 0) + value2) FROM tab;
++------+------+--+
+| _c0  | _c1  |
++------+------+--+
+| 2    | 14   |
++------+------+--+
+
+
+SELECT COUNT(DISTINCT(gender)) AS unique_gender_count, COUNT(DISTINCT(dept_name)) AS unique_dept_name FROM employee_json;
+-- +----------------------+-------------------+--+
+-- | unique_gender_count  | unique_dept_name  |
+-- +----------------------+-------------------+--+
+-- | 2                    | 6                 |
+-- +----------------------+-------------------+--+
+-- This will trigger only ONE reducer during the whole processing
+
+
+-- Using subquery to select unique value before aggregations
+SELECT COUNT(unique_gender) AS unique_gender_count FROM ( SELECT DISTINCT gender AS unique_gender FROM employee_json ) t;
+-- +----------------------+--+
+-- | unique_gender_count  |
+-- +----------------------+--+
+-- | 2                    |
+-- +----------------------+--+
+
+
+SELECT gender, MAX(STRUCT(age, emp_name)) AS oldest_emp, MIN(STRUCT(age, emp_name)) AS youngest_emp FROM employee_json GROUP BY gender;
+-- +---------+------------------------------+------------------------------+--+
+-- | gender  |          oldest_emp          |         youngest_emp         |
+-- +---------+------------------------------+------------------------------+--+
+-- | Female  | {"col1":48,"col2":"Diya"}    | {"col1":25,"col2":"Ishita"}  |
+-- | Male    | {"col1":55,"col2":"Suresh"}  | {"col1":22,"col2":"Ravi"}    |
+-- +---------+------------------------------+------------------------------+--+
+
+
+SELECT gender, MAX(STRUCT(age, emp_name)).col1 AS oldest_emp_age, MAX(STRUCT(age, emp_name)).col2 AS oldest_emp_name FROM employee_json GROUP BY gender;
+-- +---------+-----------------+------------------+--+
+-- | gender  | oldest_emp_age  | oldest_emp_name  |
+-- +---------+-----------------+------------------+--+
+-- | Female  | 48              | Diya             |
+-- | Male    | 55              | Suresh           |
+-- +---------+-----------------+------------------+--+
+
+
+
+-- GROUPING SETS => advanced multiple GROUP BY operations
+-- -------------
+
+SELECT gender, salary, COUNT(*) FROM employee_json GROUP BY gender, salary GROUPING SETS((gender, salary));
+-- +---------+---------+------+--+
+-- | gender  | salary  | _c2  |
+-- +---------+---------+------+--+
+-- | Female  | 2500    | 1    |
+-- | Female  | 3200    | 1    |
+-- | Female  | 4300    | 1    |
+-- | Female  | 4500    | 1    |
+-- | Female  | 5700    | 1    |
+-- | Female  | 6900    | 1    |
+-- | Male    | NULL    | 3    |
+-- | Male    | 2700    | 1    |
+-- | Male    | 3400    | 1    |
+-- | Male    | 3700    | 1    |
+-- | Male    | 3800    | 1    |
+-- | Male    | 3900    | 1    |
+-- | Male    | 4300    | 1    |
+-- | Male    | 4500    | 2    |
+-- | Male    | 5100    | 1    |
+-- | Male    | 5500    | 2    |
+-- +---------+---------+------+--+
+
+SELECT gender, salary, COUNT(*) FROM employee_json GROUP BY gender, salary GROUPING SETS(gender, salary);
+-- +---------+---------+------+--+
+-- | gender  | salary  | _c2  |
+-- +---------+---------+------+--+
+-- | NULL    | NULL    | 3    |
+-- | NULL    | 2500    | 1    |
+-- | NULL    | 2700    | 1    |
+-- | NULL    | 3200    | 1    |
+-- | NULL    | 3400    | 1    |
+-- | NULL    | 3700    | 1    |
+-- | NULL    | 3800    | 1    |
+-- | NULL    | 3900    | 1    |
+-- | NULL    | 4300    | 2    |
+-- | NULL    | 4500    | 3    |
+-- | NULL    | 5100    | 1    |
+-- | NULL    | 5500    | 2    |
+-- | NULL    | 5700    | 1    |
+-- | NULL    | 6900    | 1    |
+-- | Female  | NULL    | 6    |
+-- | Male    | NULL    | 14   |
+-- +---------+---------+------+--+
+
+SELECT gender, COUNT(*) FROM employee_json GROUP BY gender;                   SELECT salary, COUNT(*) FROM employee_json GROUP BY salary;
+-- +---------+------+--+                                                         +---------+------+--+
+-- | gender  | _c1  |                                                            | salary  | _c1  |
+-- +---------+------+--+                                                         +---------+------+--+
+-- | Female  | 6    |                                                            | NULL    | 3    |
+-- | Male    | 14   |                                                            | 2500    | 1    |
+-- +---------+------+--+                                                         | 2700    | 1    |
+--                                                                               | 3200    | 1    |
+--                                                                               | 3400    | 1    |
+--                                                                               | 3700    | 1    |
+--                                                                               | 3800    | 1    |
+--                                                                               | 3900    | 1    |
+--                                                                               | 4300    | 2    |
+--                                                                               | 4500    | 3    |
+--                                                                               | 5100    | 1    |
+--                                                                               | 5500    | 2    |
+--                                                                               | 5700    | 1    |
+--                                                                               | 6900    | 1    |
+--                                                                               +---------+------+--+
+
+SELECT null AS gender, salary, COUNT(*) FROM employee_json GROUP BY salary UNION ALL SELECT gender, null AS salary, COUNT(*) FROM employee_json GROUP BY gender;
+-- +-------------+-------------+----------+--+
+-- | _u1.gender  | _u1.salary  | _u1._c2  |
+-- +-------------+-------------+----------+--+
+-- | NULL        | NULL        | 3        |
+-- | NULL        | 2500        | 1        |
+-- | NULL        | 2700        | 1        |
+-- | NULL        | 3200        | 1        |
+-- | NULL        | 3400        | 1        |
+-- | NULL        | 3700        | 1        |
+-- | NULL        | 3800        | 1        |
+-- | NULL        | 3900        | 1        |
+-- | NULL        | 4300        | 2        |
+-- | NULL        | 4500        | 3        |
+-- | NULL        | 5100        | 1        |
+-- | NULL        | 5500        | 2        |
+-- | NULL        | 5700        | 1        |
+-- | NULL        | 6900        | 1        |
+-- | Female      | NULL        | 6        |
+-- | Male        | NULL        | 14       |
+-- +-------------+-------------+----------+--+
+
+
+SELECT gender, salary, COUNT(*) FROM employee_json GROUP BY gender, salary GROUPING SETS((gender, salary), gender);
+-- +---------+---------+------+--+
+-- | gender  | salary  | _c2  |
+-- +---------+---------+------+--+
+-- | Female  | NULL    | 6    |
+-- | Female  | 2500    | 1    |
+-- | Female  | 3200    | 1    |
+-- | Female  | 4300    | 1    |
+-- | Female  | 4500    | 1    |
+-- | Female  | 5700    | 1    |
+-- | Female  | 6900    | 1    |
+-- | Male    | NULL    | 3    |
+-- | Male    | NULL    | 14   |
+-- | Male    | 2700    | 1    |
+-- | Male    | 3400    | 1    |
+-- | Male    | 3700    | 1    |
+-- | Male    | 3800    | 1    |
+-- | Male    | 3900    | 1    |
+-- | Male    | 4300    | 1    |
+-- | Male    | 4500    | 2    |
+-- | Male    | 5100    | 1    |
+-- | Male    | 5500    | 2    |
+-- +---------+---------+------+--+
+
+
+-- A blank set () in the GROUPING SETS clause calculates the overall aggregation
+SELECT gender, salary, COUNT(*) FROM employee_json GROUP BY gender, salary GROUPING SETS((gender, salary), gender, salary, ());
+-- +---------+---------+------+--+
+-- | gender  | salary  | _c2  |
+-- +---------+---------+------+--+
+-- | NULL    | NULL    | 3    |
+-- | NULL    | NULL    | 20   |
+-- | NULL    | 2500    | 1    |
+-- | NULL    | 2700    | 1    |
+-- | NULL    | 3200    | 1    |
+-- | NULL    | 3400    | 1    |
+-- | NULL    | 3700    | 1    |
+-- | NULL    | 3800    | 1    |
+-- | NULL    | 3900    | 1    |
+-- | NULL    | 4300    | 2    |
+-- | NULL    | 4500    | 3    |
+-- | NULL    | 5100    | 1    |
+-- | NULL    | 5500    | 2    |
+-- | NULL    | 5700    | 1    |
+-- | NULL    | 6900    | 1    |
+-- | Female  | NULL    | 6    |
+-- | Female  | 2500    | 1    |
+-- | Female  | 3200    | 1    |
+-- | Female  | 4300    | 1    |
+-- | Female  | 4500    | 1    |
+-- | Female  | 5700    | 1    |
+-- | Female  | 6900    | 1    |
+-- | Male    | NULL    | 3    |
+-- | Male    | NULL    | 14   |
+-- | Male    | 2700    | 1    |
+-- | Male    | 3400    | 1    |
+-- | Male    | 3700    | 1    |
+-- | Male    | 3800    | 1    |
+-- | Male    | 3900    | 1    |
+-- | Male    | 4300    | 1    |
+-- | Male    | 4500    | 2    |
+-- | Male    | 5100    | 1    |
+-- | Male    | 5500    | 2    |
+-- +---------+---------+------+--+
+
+
+
+0: jdbc:hive2://rm01.itversity.com:10000> SELECT gender, salary, COUNT(*), GROUPING__ID  FROM employee_json GROUP BY gender, salary WITH CUBE ORDER BY gender, salary;
+-- +---------+---------+------+---------------+--+
+-- | gender  | salary  | _c2  | grouping__id  |
+-- +---------+---------+------+---------------+--+
+-- | NULL    | NULL    | 3    | 2             |
+-- | NULL    | NULL    | 20   | 3             |
+-- | NULL    | 2500    | 1    | 2             |
+-- | NULL    | 2700    | 1    | 2             |
+-- | NULL    | 3200    | 1    | 2             |
+-- | NULL    | 3400    | 1    | 2             |
+-- | NULL    | 3700    | 1    | 2             |
+-- | NULL    | 3800    | 1    | 2             |
+-- | NULL    | 3900    | 1    | 2             |
+-- | NULL    | 4300    | 2    | 2             |
+-- | NULL    | 4500    | 3    | 2             |
+-- | NULL    | 5100    | 1    | 2             |
+-- | NULL    | 5500    | 2    | 2             |
+-- | NULL    | 5700    | 1    | 2             |
+-- | NULL    | 6900    | 1    | 2             |
+-- | Female  | NULL    | 6    | 1             |
+-- | Female  | 2500    | 1    | 0             |
+-- | Female  | 3200    | 1    | 0             |
+-- | Female  | 4300    | 1    | 0             |
+-- | Female  | 4500    | 1    | 0             |
+-- | Female  | 5700    | 1    | 0             |
+-- | Female  | 6900    | 1    | 0             |
+-- | Male    | NULL    | 3    | 0             |
+-- | Male    | NULL    | 14   | 1             |
+-- | Male    | 2700    | 1    | 0             |
+-- | Male    | 3400    | 1    | 0             |
+-- | Male    | 3700    | 1    | 0             |
+-- | Male    | 3800    | 1    | 0             |
+-- | Male    | 3900    | 1    | 0             |
+-- | Male    | 4300    | 1    | 0             |
+-- | Male    | 4500    | 2    | 0             |
+-- | Male    | 5100    | 1    | 0             |
+-- | Male    | 5500    | 2    | 0             |
+-- +---------+---------+------+---------------+--+
+
+
+SELECT salary, COUNT(*) FROM employee_json GROUP BY salary HAVING COUNT(*) = 1;
+-- +---------+------+--+
+-- | salary  | _c1  |
+-- +---------+------+--+
+-- | 2500    | 1    |
+-- | 2700    | 1    |
+-- | 3200    | 1    |
+-- | 3400    | 1    |
+-- | 3700    | 1    |
+-- | 3800    | 1    |
+-- | 3900    | 1    |
+-- | 5100    | 1    |
+-- | 5700    | 1    |
+-- | 6900    | 1    |
+-- +---------+------+--+
+
+
+SELECT salary, COUNT(*) AS count_of_salary FROM employee_json GROUP BY salary HAVING count_of_salary > 2;
+-- +---------+------------------+--+
+-- | salary  | count_of_salary  |
+-- +---------+------------------+--+
+-- | NULL    | 3                |
+-- | 4500    | 3                |
+-- +---------+------------------+--+
+
+-- equivalent to ^^^ without using HAVING clause; using subquery
+SELECT t.salary, t.sal_count FROM ( SELECT salary, COUNT(*) AS sal_count FROM employee_json GROUP BY salary )t WHERE t.sal_count > 2;
+-- +-----------+--------------+--+
+-- | t.salary  | t.sal_count  |
+-- +-----------+--------------+--+
+-- | NULL      | 3            |
+-- | 4500      | 3            |
+-- +-----------+--------------+--+
+
+
