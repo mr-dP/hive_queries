@@ -1,0 +1,97 @@
+SELECT * FROM employee_add;
+-- +----------------------+------------------------+---------------------------+---------------------------+--+
+-- | employee_add.emp_id  | employee_add.emp_name  | employee_add.emp_cur_add  | employee_add.emp_per_add  |
+-- +----------------------+------------------------+---------------------------+---------------------------+--+
+-- | 1                    | shankar                | kolkata                   | kolkata                   |
+-- | 2                    | manish                 | bangalore                 | patna                     |
+-- | 3                    | kunal                  | delhi                     | delhi                     |
+-- | 4                    | priya                  | indore                    | jaipur                    |
+-- | 5                    | alok                   | kolkata                   | pune                      |
+-- +----------------------+------------------------+---------------------------+---------------------------+--+
+
+
+SELECT emp_name, emp_address FROM employee_add LATERAL VIEW EXPLODE(ARRAY(emp_cur_add, emp_per_add)) add AS emp_address;
+-- +-----------+--------------+--+
+-- | emp_name  | emp_address  |
+-- +-----------+--------------+--+
+-- | shankar   | kolkata      |
+-- | shankar   | kolkata      |
+-- | manish    | bangalore    |
+-- | manish    | patna        |
+-- | kunal     | delhi        |
+-- | kunal     | delhi        |
+-- | priya     | indore       |
+-- | priya     | jaipur       |
+-- | alok      | kolkata      |
+-- | alok      | pune         |
+-- +-----------+--------------+--+
+
+
+SELECT emp_name, emp_address FROM employee_add LATERAL VIEW EXPLODE(ARRAY(IF(emp_cur_add != emp_per_add, emp_cur_add, null), emp_per_add)) add AS emp_address WHERE emp_address IS NOT NULL;
+-- +-----------+--------------+--+
+-- | emp_name  | emp_address  |
+-- +-----------+--------------+--+
+-- | shankar   | kolkata      |
+-- | manish    | bangalore    |
+-- | manish    | patna        |
+-- | kunal     | delhi        |
+-- | priya     | indore       |
+-- | priya     | jaipur       |
+-- | alok      | kolkata      |
+-- | alok      | pune         |
+-- +-----------+--------------+--+
+
+
+
+-- Implementing Change Data Capture
+-- --------------------------------
+
+SELECT * FROM emp_1;
+-- +-----------+-------------+------------+--+
+-- | emp_1.id  | emp_1.name  | emp_1.add  |
+-- +-----------+-------------+------------+--+
+-- | 1         | aakash      | kolkata    |
+-- | 2         | kunal       | benaras    |
+-- | 3         | punit       | patna      |
+-- | 4         | shreya      | indore     |
+-- | 5         | ajay        | pune       |
+-- | 6         | nilesh      | jaipur     |
+-- | 7         | tina        | kashmir    |
+-- | 8         | vicky       | vizag      |
+-- | 9         | lalit       | kanpur     |
+-- +-----------+-------------+------------+--+
+
+SELECT * FROM emp_2;
+-- +-----------+-------------+------------+--+
+-- | emp_2.id  | emp_2.name  | emp_2.add  |
+-- +-----------+-------------+------------+--+
+-- | 1         | aakash      | kolkata    |
+-- | 2         | kunal       | mumbai     |
+-- | 3         | punit       | patna      |
+-- | 4         | shreya      | indore     |
+-- | 6         | nilesh      | jaipur     |
+-- | 8         | vicky       | vizag      |
+-- | 9         | lalit       | kolkata    |
+-- | 10        | chinmay     | hyderabad  |
+-- | 11        | kriti       | chennai    |
+-- +-----------+-------------+------------+--+
+
+
+
+SELECT CASE WHEN emp_1.id = emp_2.id AND CONCAT(emp_2.id, " ", emp_2.name, " ", emp_2.add) = CONCAT(emp_1.id, " ", emp_1.name, " ", emp_1.add) THEN "no update" WHEN emp_1.id = emp_2.id AND CONCAT(emp_2.id, " ", emp_2.name, " ", emp_2.add) != CONCAT(emp_1.id, " ", emp_1.name, " ", emp_1.add) THEN "update" WHEN emp_1.id IS NULL THEN "new" WHEN emp_2.id IS NULL THEN "deleted" ELSE "ERROR" END AS cdc_changes, CONCAT(emp_1.id, " ", emp_1.name, " ", emp_1.add) AS employee_1, CONCAT(emp_2.id, " ", emp_2.name, " ", emp_2.add) AS employee_2 FROM emp_1 FULL OUTER JOIN emp_2 ON emp_1.id = emp_2.id;
+
+-- +--------------+-------------------+-----------------------+--+
+-- | cdc_changes  |    employee_1     |      employee_2       |
+-- +--------------+-------------------+-----------------------+--+
+-- | no update    | 1 aakash kolkata  | 1 aakash kolkata      |
+-- | update       | 2 kunal benaras   | 2 kunal mumbai        |
+-- | no update    | 3 punit patna     | 3 punit patna         |
+-- | no update    | 4 shreya indore   | 4 shreya indore       |
+-- | deleted      | 5 ajay pune       | NULL                  |
+-- | no update    | 6 nilesh jaipur   | 6 nilesh jaipur       |
+-- | deleted      | 7 tina kashmir    | NULL                  |
+-- | no update    | 8 vicky vizag     | 8 vicky vizag         |
+-- | update       | 9 lalit kanpur    | 9 lalit kolkata       |
+-- | new          | NULL              | 10 chinmay hyderabad  |
+-- | new          | NULL              | 11 kriti chennai      |
+-- +--------------+-------------------+-----------------------+--+
