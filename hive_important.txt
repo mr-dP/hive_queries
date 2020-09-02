@@ -78,7 +78,28 @@ SELECT * FROM emp_2;
 
 
 
-SELECT CASE WHEN emp_1.id = emp_2.id AND CONCAT(emp_2.id, " ", emp_2.name, " ", emp_2.add) = CONCAT(emp_1.id, " ", emp_1.name, " ", emp_1.add) THEN "no update" WHEN emp_1.id = emp_2.id AND CONCAT(emp_2.id, " ", emp_2.name, " ", emp_2.add) != CONCAT(emp_1.id, " ", emp_1.name, " ", emp_1.add) THEN "update" WHEN emp_1.id IS NULL THEN "new" WHEN emp_2.id IS NULL THEN "deleted" ELSE "ERROR" END AS cdc_changes, CONCAT(emp_1.id, " ", emp_1.name, " ", emp_1.add) AS employee_1, CONCAT(emp_2.id, " ", emp_2.name, " ", emp_2.add) AS employee_2 FROM emp_1 FULL OUTER JOIN emp_2 ON emp_1.id = emp_2.id;
+SELECT
+  CASE WHEN emp_1.id = emp_2.id
+  AND CONCAT(
+    emp_2.id, " ", emp_2.name, " ", emp_2.add
+  ) = CONCAT(
+    emp_1.id, " ", emp_1.name, " ", emp_1.add
+  ) THEN "no update" WHEN emp_1.id = emp_2.id
+  AND CONCAT(
+    emp_2.id, " ", emp_2.name, " ", emp_2.add
+  ) != CONCAT(
+    emp_1.id, " ", emp_1.name, " ", emp_1.add
+  ) THEN "update" WHEN emp_1.id IS NULL THEN "new" WHEN emp_2.id IS NULL THEN "deleted" ELSE "ERROR" END AS cdc_changes,
+  CONCAT(
+    emp_1.id, " ", emp_1.name, " ", emp_1.add
+  ) AS employee_1,
+  CONCAT(
+    emp_2.id, " ", emp_2.name, " ", emp_2.add
+  ) AS employee_2
+FROM
+  emp_1 FULL
+  OUTER JOIN emp_2 ON emp_1.id = emp_2.id;
+
 
 -- +--------------+-------------------+-----------------------+--+
 -- | cdc_changes  |    employee_1     |      employee_2       |
