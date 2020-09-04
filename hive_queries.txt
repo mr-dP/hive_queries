@@ -968,3 +968,208 @@ SELECT emp_name, dept_name, salary, LAST_VALUE(salary) OVER(PARTITION BY dept_na
 -- +-----------+-----------------+---------+----------------------+--+
 
 
+SELECT COLLECT_LIST(gender), COLLECT_SET(gender) FROM employee_json;
+-- +------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------+--+
+-- |                                                                            _c0                                                                             |        _c1         |
+-- +------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------+--+
+-- | ["Male","Male","Male","Male","Female","Male","Female","Female","Male","Male","Male","Male","Female","Male","Male","Male","Male","Male","Female","Female"]  | ["Male","Female"]  |
+-- +------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------+--+
+
+
+SELECT SIZE(null), SIZE(ARRAY(null)), SIZE(array());
+-- +------+------+------+--+
+-- | _c0  | _c1  | _c2  |
+-- +------+------+------+--+
+-- | -1   | 1    | 0    |
+-- +------+------+------+--+
+
+
+SELECT ARRAY_CONTAINS(ARRAY(1, 2, 3, 4), 3);
+-- +-------+--+
+-- |  _c0  |
+-- +-------+--+
+-- | true  |
+-- +-------+--+
+
+SELECT ARRAY_CONTAINS(ARRAY("DIYA", "JUHI", "ASHOK", "MITHUN"), "ASHOK");
+-- +-------+--+
+-- |  _c0  |
+-- +-------+--+
+-- | true  |
+-- +-------+--+
+
+
+SELECT SORT_ARRAY(ARRAY(4, 8, 2, 4, 5, 6));
+-- +----------------+--+
+-- |      _c0       |
+-- +----------------+--+
+-- | [2,4,4,5,6,8]  |
+-- +----------------+--+
+
+SELECT SORT_ARRAY(ARRAY("DIYA", "JUHI", "ASHOK", "MITHUN"));
+-- +-----------------------------------+--+
+-- |                _c0                |
+-- +-----------------------------------+--+
+-- | ["ASHOK","DIYA","JUHI","MITHUN"]  |
+-- +-----------------------------------+--+
+
+
+-- Data-Hashing Function
+-- ---------------------
+
+SELECT emp_name, md5(emp_name) FROM employee_json;  -- 128 bit
+-- +-----------+-----------------------------------+--+
+-- | emp_name  |                _c1                |
+-- +-----------+-----------------------------------+--+
+-- | Ravi      | a3de90c0d6a5ec7dd82a779958d76a1c  |
+-- | Manish    | c6cbb5c7a518d7e4152f77e90227a83f  |
+-- | Akash     | 9e24ff27867e729a42986a3358234332  |
+-- | Suresh    | bac015e70aa82a58423deae70f973c27  |
+-- | Priya     | 71e91cbc7d97758b5f61926e4e682c12  |
+-- | Vinay     | bdff898770186da749cb63755cb1db09  |
+-- | Diya      | 98e0c7edbf3853a9b77269e02182f0df  |
+-- | Shreya    | 68da0d135cc3549f278557c77ed44f2b  |
+-- | Anil      | 91ad7fafe8e9fff76c5e4ed3279c205d  |
+-- | Raj       | e5742872ff127331b384ddfa6cd30b50  |
+-- | Kabir     | f2189be4343e040b135ae255bc7c1157  |
+-- | Purab     | 29fb81c8824d27bd992c46fbfe7bb7ad  |
+-- | Drishti   | a8adeaa04aabb26be9b7c13fc290273a  |
+-- | Ishaan    | 3f05e83bc9bb64b93e832e7233a231ec  |
+-- | Veer      | d3251d15b5aee80b504ac57e48a64685  |
+-- | Kartik    | a6b7ab8c1444c005d90818c6f75f4d92  |
+-- | Samar     | dc9a3f41b0b41c8245fd4dd73f1d6242  |
+-- | Rohan     | 02df8936eee3d4d2568857ed530671b2  |
+-- | Ishita    | 3d4b5059b3f026a0add1adc161bc844e  |
+-- | Anushka   | bbad6d2ddcd53b6f8e27472b8793bce9  |
+-- +-----------+-----------------------------------+--+
+
+SELECT emp_name, sha1(emp_name) FROM employee_json;  -- 160 bit
+-- +-----------+-------------------------------------------+--+
+-- | emp_name  |                    _c1                    |
+-- +-----------+-------------------------------------------+--+
+-- | Ravi      | f94baff7955dc839e2b8a9fe1e58a9460261e1a7  |
+-- | Manish    | ef1501dd28339c199f05ad1ba0cf019ae7f69a56  |
+-- | Akash     | f4fb94323a5381ae97e6a6428d0bbb1f2357bb34  |
+-- | Suresh    | 1a80f51a59059d630993acf78cbe07acf92e6d6c  |
+-- | Priya     | 7c34c0e6da69c17c5ca341705a7175bab81a2dab  |
+-- | Vinay     | f466a96f5dabb739ec8e28029ea59a9ed9b5915a  |
+-- | Diya      | c033f222652b8fa0cb39dfd93ac42e41243a493f  |
+-- | Shreya    | 7b532021702d082f8bf6bef641146a4343d5410d  |
+-- | Anil      | 7241d25a0e1d08b283325ebd00856d8f3971dbb5  |
+-- | Raj       | 0623eb817f35a3bd72f4d19be22d7a43b18bbe76  |
+-- | Kabir     | 0adae93d34a969cb181a6d355a0a9aba7fa084d6  |
+-- | Purab     | 652b9ff04fdb22d5bbe81b60cd6f65a837995163  |
+-- | Drishti   | 41246c9668bc01e3e601ee4dd3b938d31dc82e3f  |
+-- | Ishaan    | 95320ea4852e3d2cc0158895c5597c712f7aa386  |
+-- | Veer      | 70a2bd0420b38f10520d8c2b84738e4ea7a2a6fb  |
+-- | Kartik    | fbd2bdb35f62ec08f0e7051535b1aee8d906b701  |
+-- | Samar     | 42b34e77399d08117c033810a20dd6913fedd319  |
+-- | Rohan     | 07fecf9bad3f0c126933698c647ace85b646894b  |
+-- | Ishita    | 0289c2bec25cd24babcb51535b5c1443cccf158f  |
+-- | Anushka   | 43a357a06806fc53cbc69230874dfec0d3619919  |
+-- +-----------+-------------------------------------------+--+
+
+SELECT emp_name, sha2(emp_name, 256) FROM employee_json; -- 256 bit
+-- +-----------+-------------------------------------------------------------------+--+
+-- | emp_name  |                                _c1                                |
+-- +-----------+-------------------------------------------------------------------+--+
+-- | Ravi      | c3d486efe1fcc7244982147d2c1827ef198a6f9257530fe247f1d6071446183f  |
+-- | Manish    | ce50533891929ee117fbb3576091f31a47978e9e5a80bde5aac3baf6e83d2681  |
+-- | Akash     | 89eccb0940a76c11197cdf2341ec57c0053637e9b882d64a5753d9a2c79131f3  |
+-- | Suresh    | f73ad70629191b0dee16edd049ee0f21516bff0ec94a18df090200fb6673d124  |
+-- | Priya     | 46c052732c8b9faad79d15e58075bf88ec4b42487088432f315ff5e941b4d064  |
+-- | Vinay     | 87096f578286aa29afc506f59e53507b04deba7316afc8b3b6e46237061f4a29  |
+-- | Diya      | 0c8b5f6b61dec95f617ba4630f916049094e020929873e03d97a2e6570344e25  |
+-- | Shreya    | d5d9dc386fe4dd2dae4cca1edf2d599782d035d6cdba4ab2ddf615acb3853e30  |
+-- | Anil      | e46a41ba8b3bb177b14bef3d7a92d61f10920fd4dce194998a819e6951e8d41a  |
+-- | Raj       | 4f69905a2fdf3232f20e16f046e3c64563dc6dee02a6659c9d67ba0d2845c6a8  |
+-- | Kabir     | d9ca75cb451d5d300090d9338a61671d4c2da514df3d3b2367280d745d5e4ad0  |
+-- | Purab     | 87cdbad8cc06aed7bd45a20554d75333e80f2d559598c44ae919ff96927dfe04  |
+-- | Drishti   | 1fa75f53ed35df6f7b04c7a3281662b1e229de6408df4f2395d7d9147801c3c7  |
+-- | Ishaan    | 30dd313008c8b229b1111f711865ad22dfebbde9da3a9be19704170efa625e83  |
+-- | Veer      | 4021d50428b61186c91bfe595f6b196c1f43c0d3ff43796908d5d4cf3d189a26  |
+-- | Kartik    | be0bf5da502a8541a79ff9b48e963e3fa69b9d1e7f156ab3a5e75f71398055a9  |
+-- | Samar     | 657d762e7248213ec28173bd089b325536cd223e0e3766ab0cd097e97b123005  |
+-- | Rohan     | 723babacc99cf1f4543dc295a6d818f0cffbb2cb3ba6fd4a60080f7eb72c9d28  |
+-- | Ishita    | eaa6899af61b91ed77d17c0d864af007e5fd01b8393fd7bebf088f86d1ccc6d6  |
+-- | Anushka   | 06a8eab05c2bcbf188da73e7d2b9bcd4e698924652309dfd4ce3c60f132c8ff3  |
+-- +-----------+-------------------------------------------------------------------+--+
+
+
+SELECT MASK("ABCD-1258-drtu-R4b8", "F", "v", "*"); -- big letter to F, small letter to v, number to *
+-- +----------------------+--+
+-- |         _c0          |
+-- +----------------------+--+
+-- | FFFF-****-vvvv-F*v*  |
+-- +----------------------+--+
+
+SELECT MASK_LAST_N("ABCD-1258-drtu-R4b8", 4);
+-- +----------------------+--+
+-- |         _c0          |
+-- +----------------------+--+
+-- | ABCD-1258-drtu-Xnxn  |
+-- +----------------------+--+
+
+SELECT MASK_FIRST_N("ABCD-1258-drtu-R4b8", 4);
+-- +----------------------+--+
+-- |         _c0          |
+-- +----------------------+--+
+-- | XXXX-1258-drtu-R4b8  |
+-- +----------------------+--+
+
+SELECT MASK_SHOW_FIRST_N("ABCD-1258-drtu-R4b8", 4);
+-- +----------------------+--+
+-- |         _c0          |
+-- +----------------------+--+
+-- | ABCD-nnnn-xxxx-Xnxn  |
+-- +----------------------+--+
+
+SELECT MASK_SHOW_LAST_N("ABCD-1258-drtu-R4b8", 4);
+-- +----------------------+--+
+-- |         _c0          |
+-- +----------------------+--+
+-- | XXXX-nnnn-xxxx-R4b8  |
+-- +----------------------+--+
+
+SELECT MASK_HASH("ABCD-1258-drtu-R4b8");
+-- +-----------------------------------+--+
+-- |                _c0                |
+-- +-----------------------------------+--+
+-- | 120503da3df0b03c2e3fb7a64ef53c72  |
+-- +-----------------------------------+--+
+
+
+SELECT emp_name, AES_ENCRYPT(emp_name, '1234567890000000') AS encrypted_name, AES_DECRYPT(AES_ENCRYPT(emp_name, '1234567890000000'), '1234567890000000') AS decrypted_name FROM employee_json;
+-- 1st argument is the value to encryped/decryped and 2nd argument is 128 bit (16 Byte) keys
++-----------+-------------------+-----------------+--+
+| emp_name  |  encrypted_name   | decrypted_name  |
++-----------+-------------------+-----------------+--+
+| Ravi      | �ip��O�T��)\X��?  | Ravi            |
+| Manish    | "ȏ88��.�l�     | Manish          |
+| Akash     | X\�Xx��ز&����@   | Akash           |
+| Suresh    | b��G�
+                   /^H7�؎�   | Suresh          |
+| Priya     | ��xF
+��Ѹ;���      | Priya           |
+| Vinay     | W���M�>C��<"��   | Vinay           |
+| Diya      | ���x#�����f�+��^  | Diya            |
+| Shreya    | +o'��_g�<2�ޒ�   | Shreya          |
+| Anil      | %��8�c����<N�   | Anil            |
+| Raj       | :�o�
+                  �o�Q�����  | Raj             |
+| Kabir     | �/wY{�]�����      ��   | Kabir           |
+| Purab     | �iC��3���cnз~��   | Purab           |
+| Drishti   | ��-�����  ܒ��    | Drishti         |
+| Ishaan    | &T�����ז��]W�   | Ishaan          |
+| Veer      | Z��
+                 �}��Y��|]QB  | Veer            |
+| Kartik    | G��w-�
+                    ��-,   | Kartik          |
+| Samar     | ֯�a�)��}!   | Samar           |
+| Rohan     | HaS��e�gdr�E�   | Rohan           |
+| Ishita    | �%�3����I�u��x  | Ishita          |
+| Anushka   | ��I{�Q�UO,�э��   | Anushka         |
++-----------+-------------------+-----------------+--+
+
+
+
