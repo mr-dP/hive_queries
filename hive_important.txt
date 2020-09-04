@@ -1,3 +1,5 @@
+-- INTERVIEW QUESTION - 1 :-
+-- ----------------------
 SELECT * FROM employee_add;
 -- +----------------------+------------------------+---------------------------+---------------------------+--+
 -- | employee_add.emp_id  | employee_add.emp_name  | employee_add.emp_cur_add  | employee_add.emp_per_add  |
@@ -42,77 +44,45 @@ SELECT emp_name, emp_address FROM employee_add LATERAL VIEW EXPLODE(ARRAY(IF(emp
 -- +-----------+--------------+--+
 
 
+-- INTERVIEW QUESTION - 2 :-
+-- ----------------------
 
--- Implementing Change Data Capture
--- --------------------------------
+SELECT * FROM emp1;
+-- +----------------+--------------+----------------+--+
+-- | emp1.emp_name  | emp1.emp_id  | emp1.emp_city  |
+-- +----------------+--------------+----------------+--+
+-- | aakash         | 1            | kolkata        |
+-- | aakash         | 1            | pune           |
+-- | aakash         | 1            | mumbai         |
+-- | aakash         | 1            | kolkata        |
+-- | ravi           | 2            | assam          |
+-- | ravi           | 2            | manipur        |
+-- | ravi           | 2            | orissa         |
+-- | juhi           | 3            | chennai        |
+-- | juhi           | 3            | kerala         |
+-- | juhi           | 3            | jaipur         |
+-- | juhi           | 3            | patna          |
+-- | juhi           | 3            | kolkata        |
+-- +----------------+--------------+----------------+--+
 
-SELECT * FROM emp_1;
--- +-----------+-------------+------------+--+
--- | emp_1.id  | emp_1.name  | emp_1.add  |
--- +-----------+-------------+------------+--+
--- | 1         | aakash      | kolkata    |
--- | 2         | kunal       | benaras    |
--- | 3         | punit       | patna      |
--- | 4         | shreya      | indore     |
--- | 5         | ajay        | pune       |
--- | 6         | nilesh      | jaipur     |
--- | 7         | tina        | kashmir    |
--- | 8         | vicky       | vizag      |
--- | 9         | lalit       | kanpur     |
--- +-----------+-------------+------------+--+
+-- OPTION 01
+SELECT emp_name, emp_id, emp_city2 FROM(SELECT emp_name, emp_id, emp_city, FIRST_VALUE(emp_city) OVER(PARTITION BY emp_name) AS emp_city2 FROM emp1) AS z GROUP BY z.emp_name, z.emp_id, z.emp_city2;
+-- +-----------+---------+------------+--+
+-- | emp_name  | emp_id  | emp_city2  |
+-- +-----------+---------+------------+--+
+-- | aakash    | 1       | kolkata    |
+-- | juhi      | 3       | chennai    |
+-- | ravi      | 2       | assam      |
+-- +-----------+---------+------------+--+
 
-SELECT * FROM emp_2;
--- +-----------+-------------+------------+--+
--- | emp_2.id  | emp_2.name  | emp_2.add  |
--- +-----------+-------------+------------+--+
--- | 1         | aakash      | kolkata    |
--- | 2         | kunal       | mumbai     |
--- | 3         | punit       | patna      |
--- | 4         | shreya      | indore     |
--- | 6         | nilesh      | jaipur     |
--- | 8         | vicky       | vizag      |
--- | 9         | lalit       | kolkata    |
--- | 10        | chinmay     | hyderabad  |
--- | 11        | kriti       | chennai    |
--- +-----------+-------------+------------+--+
-
-
-
-SELECT
-  CASE WHEN emp_1.id = emp_2.id
-  AND CONCAT(
-    emp_2.id, " ", emp_2.name, " ", emp_2.add
-  ) = CONCAT(
-    emp_1.id, " ", emp_1.name, " ", emp_1.add
-  ) THEN "no update" WHEN emp_1.id = emp_2.id
-  AND CONCAT(
-    emp_2.id, " ", emp_2.name, " ", emp_2.add
-  ) != CONCAT(
-    emp_1.id, " ", emp_1.name, " ", emp_1.add
-  ) THEN "update" WHEN emp_1.id IS NULL THEN "new" WHEN emp_2.id IS NULL THEN "deleted" ELSE "ERROR" END AS cdc_changes,
-  CONCAT(
-    emp_1.id, " ", emp_1.name, " ", emp_1.add
-  ) AS employee_1,
-  CONCAT(
-    emp_2.id, " ", emp_2.name, " ", emp_2.add
-  ) AS employee_2
-FROM
-  emp_1 FULL
-  OUTER JOIN emp_2 ON emp_1.id = emp_2.id;
+-- OPTION 02
+SELECT t.emp_id, t.emp_name, t.emp_city FROM (SELECT *, ROW_NUMBER() OVER(PARTITION BY emp_name, emp_id) AS city FROM emp1) t WHERE city = 1;
+-- +-----------+-------------+-------------+--+
+-- | t.emp_id  | t.emp_name  | t.emp_city  |
+-- +-----------+-------------+-------------+--+
+-- | 1         | aakash      | kolkata     |
+-- | 3         | juhi        | chennai     |
+-- | 2         | ravi        | assam       |
+-- +-----------+-------------+-------------+--+
 
 
--- +--------------+-------------------+-----------------------+--+
--- | cdc_changes  |    employee_1     |      employee_2       |
--- +--------------+-------------------+-----------------------+--+
--- | no update    | 1 aakash kolkata  | 1 aakash kolkata      |
--- | update       | 2 kunal benaras   | 2 kunal mumbai        |
--- | no update    | 3 punit patna     | 3 punit patna         |
--- | no update    | 4 shreya indore   | 4 shreya indore       |
--- | deleted      | 5 ajay pune       | NULL                  |
--- | no update    | 6 nilesh jaipur   | 6 nilesh jaipur       |
--- | deleted      | 7 tina kashmir    | NULL                  |
--- | no update    | 8 vicky vizag     | 8 vicky vizag         |
--- | update       | 9 lalit kanpur    | 9 lalit kolkata       |
--- | new          | NULL              | 10 chinmay hyderabad  |
--- | new          | NULL              | 11 kriti chennai      |
--- +--------------+-------------------+-----------------------+--+
